@@ -13,6 +13,7 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 7;
 $offset = ($page - 1) * $limit;
 
+// Get contacts by pagination and search
 $query = "SELECT * FROM contacts WHERE user_id = ? AND (name LIKE ? OR email LIKE ? OR phone LIKE ? OR address LIKE ?) LIMIT ? OFFSET ?";
 $search_param = '%' . $search . '%';
 
@@ -21,6 +22,7 @@ $stmt->bind_param("issssii", $user_id, $search_param, $search_param, $search_par
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Get total contacts
 $total_query = "SELECT COUNT(*) FROM contacts WHERE user_id = ? AND (name LIKE ? OR email LIKE ? OR phone LIKE ? OR address LIKE ?)";
 $total_stmt = $conn->prepare($total_query);
 $total_stmt->bind_param("issss", $user_id, $search_param, $search_param, $search_param, $search_param);
