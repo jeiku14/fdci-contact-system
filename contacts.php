@@ -40,6 +40,7 @@ $total_pages = ceil($total_contacts / $limit);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     $(document).ready(function() {
+        // handler for search input
         $('input[name="search"]').on('input', function() {
             var search = $(this).val();
             $.ajax({
@@ -52,6 +53,7 @@ $total_pages = ceil($total_contacts / $limit);
             });
         });
 
+        // handler for delete contact
         $(document).on('click', '.delete-contact', function(e) {
             e.preventDefault();
             var link = $(this).attr('href');
